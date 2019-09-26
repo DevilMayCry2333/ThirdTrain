@@ -1,184 +1,186 @@
 <template>
-  <div class="takeaway">
-    <div class="wrapper" ref="takeawayWrapper">
-      <div class="content">
-        <!-- 顶部地址、搜素栏 -->
-        <div class="search-wrapper">
-          <div class="location row">
-              <div class="location-info col-xs-4 col-sm-4 col-md-4"><img src="./location.png" class="loaction-icon" height="16px" width="16px">{{address}}</div>
-              <div class="showmore col-xs-1 col-sm-1 col-md-1"><img src="./showdetails.png" class="loaction-icon" height="16px" width="16px"></div>
-              <div class="location-weather col-xs-offset-5 col-xs-2 col-sm-2 col-md-2">
-                33℃&nbsp;
-                <img src="./cloudy.png" class="loaction6-icon" height="18px" width="18px">
-              </div>
-          </div>
-          <div class="search-box" v-bind:class="{'fixed': false}">
-            <input type="text" class="input-search form-control" placeholder="输入商家、商品名称">
-          </div>
-          <div class="hot-search">
-            <ul class="hotItems">
-              <li class="items" v-for="item in hotitems">{{item}}</li>
-            </ul>
-          </div>
-        </div>
-        <!-- 主页面商品分类 -->
-        <div class="search-category">
-          <table class="table-category">
-            <tr>
-              <td class="category col-xm-2 col-md-2" v-for="(category, index) in categories" v-if="index<5">
-                <img class="category-icon" :src="category.img" alt="" height="20px" width="20px">
-                <span class="category-title">{{category.message}}</span>
-              </td>
-            </tr>
-            <tr>
-              <td class="category col-xm-2 col-md-2" v-for="(category, index) in categories" v-if="index>=5">
-                <img class="category-icon" :src="category.img" alt="" height="20px" width="20px">
-                <span class="category-title">{{category.message}}</span>
-              </td>
-            </tr>
-          </table>
-        </div>  
-        <!-- 走马灯广告栏 -->
-        <div class="advertisement">
-          <el-carousel height="100px" arrow="never" indicator-position="none">
-            <el-carousel-item v-for="addr in advertisements" v-bind:key="addr">
-              <img :src="addr" height="100px" width="100%">
-            </el-carousel-item>
-          </el-carousel>
-        </div> 
-        <!-- 大图推荐 -->
-        <div class="main-recommend">
-          <el-row :gutter="20" class="main-recommend-row">
-            <el-col class="main-recommend-col first-row" :span="12">
-              <div class="main-recommend-message message-first">
-                <span class="message-title">限量抢购</span>
-                <span class="message-info">美食午餐 9.9元起</span>
-                <span class="message-other">2485人正在抢购></span>
-              </div>
-              <img class="main-recommend-image1" :src="mainRecommendImg[0].imgAddress" alt="">
-            </el-col>
-            <el-col class="main-recommend-col first-row" :span="12">
-              <div class="main-recommend-message message-first">
-                <span class="message-title">周五半价日</span>
-                <span class="message-info">满30减15起</span>
-                <span class="message-other">立即抢购></span>
-              </div>
-              <img class="main-recommend-image1" :src="mainRecommendImg[1].imgAddress" alt="">
-            </el-col>
-          </el-row>
-          <el-row :gutter="20" class="main-recommend-row">
-            <el-col class="main-recommend-col subordinate-row" :span="8">
-              <div class="main-recommend-message">
-                <span class="message-title-2">生鲜晚市</span>
-                <span class="message-info-2">1元优惠开市</span>
-              </div>
-              <img class="main-recommend-image2" :src="mainRecommendImg[2].imgAddress" alt="">              
-            </el-col>
-            <el-col class="main-recommend-col subordinate-row" :span="8">
-              <div class="main-recommend-message">
-                <span class="message-title-2">品质联盟</span>
-                <span class="message-info-2">品质升级</span>
-              </div>
-              <img class="main-recommend-image2" :src="mainRecommendImg[3].imgAddress" alt="">              
-            </el-col>
-            <el-col class="main-recommend-col subordinate-row" :span="8">
-              <div class="main-recommend-message">
-                <span class="message-title-2">人气简餐</span>
-                <span class="message-info-2">大牌必吃</span>
-              </div>
-              <img class="main-recommend-image2" :src="mainRecommendImg[4].imgAddress" alt="">              
-            </el-col>
-          </el-row>
-        </div>
-        <!-- 品质优选推荐 -->
-        <div class="special-select">
-          <div class="top-title row">
-            <div class="line"></div>
-            <div class="special-select-title">品质优选</div>
-            <div class="line"></div>
-          </div>
-          <div class="row">
-            <div v-for="(selectStore, index) in recommendList" class="select-list col-md-3 col-sm-3 col-xm-3">
-              <img class="select-img" :src="selectStore.src" height="40px" width="40px">
-              <span class="select-name">{{selectStore.name}}</span>
-              <span class="select-type">大牌精选</span>
+  <div>
+    <div class="takeaway">
+      <div class="wrapper" ref="takeawayWrapper">
+        <div class="content">
+          <!-- 顶部地址、搜素栏 -->
+          <div class="search-wrapper">
+            <div class="location row">
+                <div class="location-info col-xs-4 col-sm-4 col-md-4"><img src="./location.png" class="loaction-icon" height="16px" width="16px">{{address}}</div>
+                <div class="showmore col-xs-1 col-sm-1 col-md-1"><img src="./showdetails.png" class="loaction-icon" height="16px" width="16px"></div>
+                <div class="location-weather col-xs-offset-5 col-xs-2 col-sm-2 col-md-2">
+                  33℃&nbsp;
+                  <img src="./cloudy.png" class="loaction6-icon" height="18px" width="18px">
+                </div>
+            </div>
+            <div class="search-box" v-bind:class="{'fixed': false}">
+              <input type="text" class="input-search form-control" placeholder="输入商家、商品名称">
+            </div>
+            <div class="hot-search">
+              <ul class="hotItems">
+                <li class="items" v-for="item in hotitems">{{item}}</li>
+              </ul>
             </div>
           </div>
-        </div>
-        <!-- 推荐商家列表 -->
-        <div class="main-menu">
-          <div class="top-title row">
-            <div class="line"></div>
-            <div class="special-select-title">推荐商家</div>
-            <div class="line"></div>
+          <!-- 主页面商品分类 -->
+          <div class="search-category">
+            <table class="table-category">
+              <tr>
+                <td class="category col-xm-2 col-md-2" v-for="(category, index) in categories" v-if="index<5">
+                  <img class="category-icon" :src="category.img" alt="" height="20px" width="20px">
+                  <span class="category-title">{{category.message}}</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="category col-xm-2 col-md-2" v-for="(category, index) in categories" v-if="index>=5">
+                  <img class="category-icon" :src="category.img" alt="" height="20px" width="20px">
+                  <span class="category-title">{{category.message}}</span>
+                </td>
+              </tr>
+            </table>
+          </div>  
+          <!-- 走马灯广告栏 -->
+          <div class="advertisement">
+            <el-carousel height="100px" arrow="never" indicator-position="none">
+              <el-carousel-item v-for="addr in advertisements" v-bind:key="addr">
+                <img :src="addr" height="100px" width="100%">
+              </el-carousel-item>
+            </el-carousel>
+          </div> 
+          <!-- 大图推荐 -->
+          <div class="main-recommend">
+            <el-row :gutter="20" class="main-recommend-row">
+              <el-col class="main-recommend-col first-row" :span="12">
+                <div class="main-recommend-message message-first">
+                  <span class="message-title">限量抢购</span>
+                  <span class="message-info">美食午餐 9.9元起</span>
+                  <span class="message-other">2485人正在抢购></span>
+                </div>
+                <img class="main-recommend-image1" :src="mainRecommendImg[0].imgAddress" alt="">
+              </el-col>
+              <el-col class="main-recommend-col first-row" :span="12">
+                <div class="main-recommend-message message-first">
+                  <span class="message-title">周五半价日</span>
+                  <span class="message-info">满30减15起</span>
+                  <span class="message-other">立即抢购></span>
+                </div>
+                <img class="main-recommend-image1" :src="mainRecommendImg[1].imgAddress" alt="">
+              </el-col>
+            </el-row>
+            <el-row :gutter="20" class="main-recommend-row">
+              <el-col class="main-recommend-col subordinate-row" :span="8">
+                <div class="main-recommend-message">
+                  <span class="message-title-2">生鲜晚市</span>
+                  <span class="message-info-2">1元优惠开市</span>
+                </div>
+                <img class="main-recommend-image2" :src="mainRecommendImg[2].imgAddress" alt="">              
+              </el-col>
+              <el-col class="main-recommend-col subordinate-row" :span="8">
+                <div class="main-recommend-message">
+                  <span class="message-title-2">品质联盟</span>
+                  <span class="message-info-2">品质升级</span>
+                </div>
+                <img class="main-recommend-image2" :src="mainRecommendImg[3].imgAddress" alt="">              
+              </el-col>
+              <el-col class="main-recommend-col subordinate-row" :span="8">
+                <div class="main-recommend-message">
+                  <span class="message-title-2">人气简餐</span>
+                  <span class="message-info-2">大牌必吃</span>
+                </div>
+                <img class="main-recommend-image2" :src="mainRecommendImg[4].imgAddress" alt="">              
+              </el-col>
+            </el-row>
           </div>
-          <div class="filter row">
-            <div class="filter-list col-md-10 col-sm-10 col-xs-10">
-                <div class="col-xs-4"><h5 class="filter-title">综合排序</h5></div>
-                <div class="col-xs-4"><h5 class="filter-title">好评优先</h5></div>
-                <div class="col-xs-4"><h5 class="filter-title">距离优先</h5></div>
+          <!-- 品质优选推荐 -->
+          <div class="special-select">
+            <div class="top-title row">
+              <div class="line"></div>
+              <div class="special-select-title">品质优选</div>
+              <div class="line"></div>
             </div>
-            <div class="col-md-2 col-sm-2 col-xs-2">筛选</div>
+            <div class="row">
+              <div v-for="(selectStore, index) in recommendList" class="select-list col-md-3 col-sm-3 col-xm-3">
+                <img class="select-img" :src="selectStore.src" height="40px" width="40px">
+                <span class="select-name">{{selectStore.name}}</span>
+                <span class="select-type">大牌精选</span>
+              </div>
+            </div>
           </div>
-          <div class="sellers-list">
-            <ul>
-              <li v-for="list in 10" v-bind:key="list">
-                <router-link :to="{
-                  name:'store',
-                  params: { sellersData:sellersData }
-                  }"> <!-- 商家列表路由，路由到制定store组件 -->
-                  <div class="seller-info">
-                    <div class="seller-avatar">
-                      <img width="57" height="57" v-bind:src="sellers.avatar">
-                    </div>
-                    <div class="seller-content">
-                      <div class="seller-name">
-                        {{sellers.name}}
-                        <div class="dislike" v-on:click="showAllSupports()">...</div>
+          <!-- 推荐商家列表 -->
+          <div class="main-menu">
+            <div class="top-title row">
+              <div class="line"></div>
+              <div class="special-select-title">推荐商家</div>
+              <div class="line"></div>
+            </div>
+            <div class="filter row">
+              <div class="filter-list col-md-10 col-sm-10 col-xs-10">
+                  <div class="col-xs-4"><h5 class="filter-title">综合排序</h5></div>
+                  <div class="col-xs-4"><h5 class="filter-title">好评优先</h5></div>
+                  <div class="col-xs-4"><h5 class="filter-title">距离优先</h5></div>
+              </div>
+              <div class="col-md-2 col-sm-2 col-xs-2">筛选</div>
+            </div>
+            <div class="sellers-list">
+              <ul>
+                <li v-for="list in 10" v-bind:key="list">
+                  <router-link :to="{
+                    name:'store',
+                    params: { sellersData:sellersData }
+                    }"> <!-- 商家列表路由，路由到制定store组件 -->
+                    <div class="seller-info">
+                      <div class="seller-avatar">
+                        <img width="57" height="57" v-bind:src="sellers.avatar">
                       </div>
-                      <ul class="seller-detail">
-                        <li class="seller-score">
-                          <star class="star" v-bind:size="24" v-bind:score="sellers.score"></star>
-                          {{sellers.score}}
-                          &nbsp;月售{{sellers.sellCount}}
-                          <span class="delivery-type">蜂鸟专送</span>
-                        </li>
-                        <li class="seller-minPrice">
-                          起送￥{{sellers.minPrise}} | 
-                          配送￥{{sellers.deliveryPrice}}
-                          <span class="delivery-discount">
-                            {{sellers.deliveryTime}}分钟 | {{sellers.deliveryPrice / 2.0}}km
-                          </span>
-                        </li>
-                        <li class="category">
-                          <i class="el-icon-bell"></i>
-                          {{sellers.category}}
-                        </li>
-                        <li class="seller-support">
-                          <div v-if="sellers.supports" class="supports">
-                            <icon v-bind:iconSize="12" v-bind:supportsType="sellers.supports[0].type"></icon>
-                            <span class="text">{{sellers.supports[0].description}}</span>
-                            <span class="support-showall" v-on:click="showAllSupports()">
-                              <i class="el-icon-arrow-down"></i>
+                      <div class="seller-content">
+                        <div class="seller-name">
+                          {{sellers.name}}
+                          <div class="dislike" v-on:click="showAllSupports()">...</div>
+                        </div>
+                        <ul class="seller-detail">
+                          <li class="seller-score">
+                            <star class="star" v-bind:size="24" v-bind:score="sellers.score"></star>
+                            {{sellers.score}}
+                            &nbsp;月售{{sellers.sellCount}}
+                            <span class="delivery-type">蜂鸟专送</span>
+                          </li>
+                          <li class="seller-minPrice">
+                            起送￥{{sellers.minPrise}} | 
+                            配送￥{{sellers.deliveryPrice}}
+                            <span class="delivery-discount">
+                              {{sellers.deliveryTime}}分钟 | {{sellers.deliveryPrice / 2.0}}km
                             </span>
-                          </div>
-                          <div v-if="sellers.supports" class="supports">
-                            <icon v-bind:iconSize="12" v-bind:supportsType="sellers.supports[1].type"></icon>
-                            <span class="text">{{sellers.supports[1].description}}</span>
-                          </div>
-                        </li>
-                      </ul>
+                          </li>
+                          <li class="category">
+                            <i class="el-icon-bell"></i>
+                            {{sellers.category}}
+                          </li>
+                          <li class="seller-support">
+                            <div v-if="sellers.supports" class="supports">
+                              <icon v-bind:iconSize="12" v-bind:supportsType="sellers.supports[0].type"></icon>
+                              <span class="text">{{sellers.supports[0].description}}</span>
+                              <span class="support-showall" v-on:click="showAllSupports()">
+                                <i class="el-icon-arrow-down"></i>
+                              </span>
+                            </div>
+                            <div v-if="sellers.supports" class="supports">
+                              <icon v-bind:iconSize="12" v-bind:supportsType="sellers.supports[1].type"></icon>
+                              <span class="text">{{sellers.supports[1].description}}</span>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
                     </div>
-                  </div>
-                </router-link>
-              </li>
-              <router-view></router-view>
-            </ul>
+                  </router-link>
+                </li>
+                <router-view></router-view>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
+      <tabbar></tabbar>
     </div>
-    <tabbar></tabbar>
   </div>
 </template>
 <script type="text/ecmascript-6">
@@ -188,10 +190,31 @@ import icon from "../icon/icon";
 import store from "../store/store";
 import tabbar from '../tabbar/tabbar'
 export default {
+  props: {
+    onRefresh: {
+      type: Function,
+      required: false
+    }
+  },
   data() {
     return {
+      defaultOffset: 100, // 默认高度, 相应的修改.releshMoudle的margin-top和.down-tip, .up-tip, .refresh-tip的height
+      top: 0,
+      scrollIsToTop: 0,
+      startY: 0,
+      isDropDown: false, // 是否下拉
+      isRefreshing: false, // 是否正在刷新
+      dropDownState: 1, // 显示1:下拉刷新, 2:松开刷新, 3:刷新中……
+      dropDownStateText: {
+        downTxt: '下拉刷新',
+        downImg: '',
+        upTxt: '松开刷新',
+        upImg: 'release.png',
+        refreshTxt: '刷新中...',
+        refreshImg: 'refresh.gif'
+      },
       sellersData: {},
-      address:"杭州师范大学",
+      address:"创业大厦",
       sellers: {},
       searchBarHeight: 50,
       scrollY: 0,
@@ -328,7 +351,8 @@ export default {
       function onComplete (data) {
         // data是具体的定位信息
         console.log(data);
-        _this.address = data.formattedAddress;
+        if(data.formattedAddress!=undefined && data.formattedAddress)
+          _this.address = data.formattedAddress;
         console.log(_this.address);
       }
 
@@ -384,6 +408,57 @@ export default {
         self.scrollY = Math.abs(Math.round(pos.y));
         console.log("self.scrollY: " + self.scrollY);
       });
+    },
+    touchStart (e) {
+      this.startY = e.targetTouches[0].pageY
+    },
+    touchMove (e) {
+      this.scrollIsToTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop // safari 获取scrollTop用window.pageYOffset
+      if (e.targetTouches[0].pageY > this.startY) { // 下拉
+        this.isDropDown = true
+        if (this.scrollIsToTop === 0 && !this.isRefreshing) {
+          // 拉动的距离
+          let diff = e.targetTouches[0].pageY - this.startY - this.scrollIsToTop
+          this.top = Math.pow(diff, 0.8) + (this.dropDownState === 3 ? this.defaultOffset : 0)
+          if (this.top >= this.defaultOffset) {
+            this.dropDownState = 2
+            e.preventDefault()
+          } else {
+            this.dropDownState = 1
+            e.preventDefault()
+          }
+        }
+      } else {
+        this.isDropDown = false
+        this.dropDownState = 1
+      }
+    },
+    touchEnd (e) {
+      if (this.isDropDown && !this.isRefreshing) {
+        if (this.top >= this.defaultOffset) { // do refresh
+          this.refresh()
+          this.isRefreshing = true
+          console.log(`do refresh`)
+        } else { // cancel refresh
+          this.isRefreshing = false
+          this.isDropDown = false
+          this.dropDownState = 1
+          this.top = 0
+        }
+      }
+    },
+    refresh () {
+      this.dropDownState = 3
+      this.top = this.defaultOffset
+      setTimeout(() => {
+        this.onRefresh(this.refreshDone)
+      }, 1200)
+    },
+    refreshDone () {
+      this.isRefreshing = false
+      this.isDropDown = false
+      this.dropDownState = 1
+      this.top = 0
     },
     chooseSeller() {
       console.log("self.scrollY: " + self.scrollY);

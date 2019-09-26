@@ -12,10 +12,10 @@
     <h3 class="title">用户注册</h3>
     <el-form-item prop="account" >
       <el-input style="display:inline" type="text" v-model="ruleForm2.account" auto-complete="off" placeholder="手机号"></el-input>
-         <el-link style="display:inline" type="primary">发送验证码</el-link>
+         <el-link @click="sendVerfy" style="display:inline" type="primary">发送验证码</el-link>
     </el-form-item>
     <el-form-item prop="checkPass">
-      <el-input type="password" v-model="ruleForm2.checkPass" auto-complete="off" placeholder="验证码"></el-input>
+      <el-input v-model="ruleForm2.checkPass" auto-complete="off" placeholder="验证码"></el-input>
     </el-form-item>
     <!-- <el-checkbox v-model="checked" checked class="remember">记住密码</el-checkbox> -->
     <el-form-item style="width:100%;">
@@ -58,6 +58,9 @@ export default {
       handleSubmit2(e){
           console.log("==**==");
           this.$router.push("/takeaway");
+      },
+      sendVerfy(){
+        this.ruleForm2.checkPass = '456999';
       }
   }
 
